@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import NotFound from './pages/NotFound';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hi</div>
+    element: <div>Hi</div>,
+    errorElement: <NotFound />
   }
 ]);
 
