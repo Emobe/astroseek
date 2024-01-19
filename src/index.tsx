@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import NotFound from './pages/NotFound';
-import Button from '@mui/material/Button';
+
+import MainLayout from './layouts/Main';
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -15,8 +16,14 @@ import '@fontsource/roboto/700.css';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hi<Button>Hello</Button></div>,
-    errorElement: <NotFound />
+    element: <MainLayout />,
+    errorElement: <NotFound />,
+    children: [
+      {
+        path: '/',
+        element: <div>Hello</div>
+      }
+    ]
   }
 ]);
 
