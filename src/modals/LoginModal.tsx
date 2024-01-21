@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import {useFormik} from 'formik';
+import * as yup from 'yup';
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -20,6 +21,8 @@ const style = {
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
+  display: 'flex',
+  flexDirection: 'column'
 };
 
 interface LoginFormValues {
@@ -34,15 +37,21 @@ const initialValues: LoginFormValues = {
 
 const onSubmit = (values: LoginFormValues) => {};
 
-const validate = () => {};
+const validationSchema = yup.object().shape({
+  email: yup.string()
+    .email('Enter a valid email address')
+    .required('Enter a valid email address')
+});
+
 
 const LoginModal: React.FC<LoginModalProps> = ({isOpen, onClose}) => {
 
   const formik = useFormik({
     initialValues,
     onSubmit,
-    validate
+    validationSchema
   });
+
 
   return (
     <Modal
@@ -51,12 +60,21 @@ const LoginModal: React.FC<LoginModalProps> = ({isOpen, onClose}) => {
     >
       <Box sx={style} component="form" onSubmit={formik.handleSubmit}>
         <TextField
+          data-testid="email"
           label="Email Address"
           value={formik.values.email}
+          error={!!formik.errors.email}
+          helperText={formik.errors.email}
+          onChange={formik.handleChange}
+          name="email"
         />
         <TextField
+          name="password"
+          data-testid="password"
           label="Password"
           value={formik.values.password}
+          onChange={formik.handleChange}
+          type="password"
         />
         <Button type="submit">Login</Button>
       </Box>
