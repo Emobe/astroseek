@@ -5,6 +5,8 @@ import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import NotFound from './pages/NotFound';
 
+import {Provider} from 'react-redux';
+
 import MainLayout from './layouts/Main';
 
 import '@fontsource/roboto/300.css';
